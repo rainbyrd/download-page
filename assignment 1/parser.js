@@ -1,8 +1,7 @@
 const https = require('https')
-const url = 'https://web.ics.purdue.edu/~gchopra/class/public/pages/webdesign/05_simple.html'
+const url = 'https://www.littlewebhut.com/articles/simple_web_page/'
 https.get(url, (response) => {
     let webpageText = ''
-    let webpageText1 = ''
     response.on('data', (chunk) => {
         webpageText += chunk.toString('utf8')
     })
@@ -14,28 +13,23 @@ https.get(url, (response) => {
         (b) converts those words into an array.
         So, if a webpage has the following tags:
         ------------------------------------------------------------------------
-        <body>
-            ...
-            <h1>Welcome to Node.js!</h1>
-            ......
-            <h1>Working with npm</h1>
-            ....
-            <h1>Installing MongoDB</h1>
-            ...
-        </body>
+        webpageText = webpageText.split('h1>')
+        webpageText = webpageText[1].slice(0, -2)
+        webpageText = webpageText.split(' ')
         ------------------------------------------------------------------------
         Your array should look like this:
         ['Welcome', 'to', 'Node.js!', 'Working', 'with', 'npm', 'Installing', 'MongoDB']
         */
 
         // YOUR CODE HERE:
-  let webpageText1 = webpageText.split('h1>')
-  let webpageText2 = webpageText1.substring(0,10)
-console.log(webpageText2)
-// const words =
-// const wordarray = words.split(" ")
+    webpageText = webpageText.split('h1>')
 
-
+    for(i=0; i<webpageText.length; i++) {
+        let w = webpageText[i].split('</h1')
+        w = w.slice(0, -2)
+        // w = w.split(' ')
+        console.log(w)
+}
     })
 }).on('error', (error) => {
     console.error(`Got error: ${error.message}`)
